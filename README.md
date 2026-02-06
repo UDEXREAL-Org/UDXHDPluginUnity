@@ -1,5 +1,7 @@
 # UDXHDPluginUnity
 
+Congratulations on making it this far, developer! 🎉
+
 A Unity Package Manager (UPM) compatible hand driving system designed for XR and interactive applications.
 
 This package is distributed via Git and can be directly integrated into Unity projects using Unity Package Manager.
@@ -138,10 +140,6 @@ See the `LICENSE` file for details.
 
 ## Author
  
-GitHub: [https://github.com/yourname](https://github.com/UDEXREAL-Org)
+GitHub: [UDEXREAL](https://github.com/UDEXREAL-Org)
 
 ---
-
-## Changelog
-
-All notable changes are documented in [CHANGELOG.md](./CHANGELOG.md).
