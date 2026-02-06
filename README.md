@@ -34,7 +34,7 @@ This package is distributed via Git and can be directly integrated into Unity pr
 1. Open **Unity**
 2. Navigate to **Window → Package Manager**
 3. Click **“+” → Add package from git URL**
-4. Enter: https://github.com/UDEXREAL-Org/UDXHDPluginUnity/commits/release_2.2.3
+4. Enter: https://github.com/UDEXREAL-Org/UDXHDPluginUnity.git#release_2.2.3
 
 > Replace the version tag with the desired release.
 
