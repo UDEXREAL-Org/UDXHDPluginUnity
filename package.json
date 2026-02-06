@@ -1,0 +1,21 @@
+{
+  "name": "com.udexreal.handdriver",
+  "displayName": "Hand Driver",
+  "version": "2.1.8",
+  "unity": "2021.3",
+  "description": "Hand Driver",
+  "author": {
+    "name": "Udexreal"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.xr.interaction.toolkit": "2.5.4"
+  },
+  "samples": [
+    {
+      "displayName": "Hand Driver Demo",
+      "description": "Example scene for Hand Driver.",
+      "path": "Samples~/Hand Driver Demo"
+    }
+  ]
+}
