@@ -41,7 +41,7 @@ This package is distributed via Git and can be directly integrated into Unity pr
 ---
 
 ## Package Structure
-
+```
 HandDriverUPM/
 ├─ Runtime/
 │ ├─ Scripts/
@@ -54,7 +54,7 @@ HandDriverUPM/
 ├─ package.json
 ├─ README.md
 └─ CHANGELOG.md
-
+```
 
 ### Folder Overview
 
