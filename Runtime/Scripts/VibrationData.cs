@@ -9,7 +9,7 @@ public struct SingleVirbator
     {
         command = command < 1 ? 1 : command > 3 ? 3 : command;
         duration = duration < 0 ? 0 : duration;
-        amplitude = amplitude < 4 ? 4 : amplitude > 10 ? 10 : amplitude;
+        amplitude = amplitude < 4 ? 4 : amplitude > 250 ? 250 : amplitude;
 
         ActiveCommand = command;
         Duration = duration;
