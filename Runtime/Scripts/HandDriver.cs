@@ -101,14 +101,15 @@ public class HandDriver : MonoBehaviour
     public InputData inputData = new();
 
     [Header("[Vibration Control]")]
+    public bool ISController20;
     public string SendBackIP;
     public VibrationData vibrationData;
 
-    [BoxGroup("Vibrator 1"), Min(0), Label("Million Second")]
+    [HideIf("ISController20"), BoxGroup("Vibrator 1"), Min(0), Label("Million Second")]
     public int Duration1 = 20;
-    [BoxGroup("Vibrator 1"), Range(4, 10)]
+    [HideIf("ISController20"), BoxGroup("Vibrator 1"), Range(4, 10)]
     public int Amplitude1 = 4;
-    [Button]
+    [HideIf("ISController20"), Button]
     public void Vibrator_1Active()
     {
         if (Network == null) return;
@@ -134,11 +135,11 @@ public class HandDriver : MonoBehaviour
         Network.SendVibrationMsg(CharacterName, SendBackIP, vibrationData);
     }
 
-    [BoxGroup("Vibrator 2"), Min(0), Label("Million Second")]
+    [HideIf("ISController20"), BoxGroup("Vibrator 2"), Min(0), Label("Million Second")]
     public int Duration2 = 20;
-    [BoxGroup("Vibrator 2"), Range(4, 10)]
+    [HideIf("ISController20"), BoxGroup("Vibrator 2"), Range(4, 10)]
     public int Amplitude2 = 4;
-    [Button]
+    [HideIf("ISController20"), Button]
     public void Vibrator_2Active()
     {
         if (Network == null) return;
@@ -163,7 +164,7 @@ public class HandDriver : MonoBehaviour
         }
         Network.SendVibrationMsg(CharacterName, SendBackIP, vibrationData);
     }
-    [Button]
+    [HideIf("ISController20"), Button]
     public void BothActiveWithVibrator_1Parameters()
     {
         if (Network == null) return;
@@ -187,6 +188,39 @@ public class HandDriver : MonoBehaviour
             vibrationData = new VibrationData(Virbators);
         }
         Network.SendVibrationMsg(CharacterName, SendBackIP, vibrationData);
+    }
+
+    [ShowIf("ISController20"), BoxGroup("Vibrator"), Range(40, 30000), Label("Million Second")]
+    public int Duration = 200;
+    [ShowIf("ISController20"), BoxGroup("Vibrator"), Range(1, 1000)]
+    public int Amplitude = 1000;
+    [ShowIf("ISController20"), BoxGroup("Vibrator"), Range(7, 3000)]
+    public int Rate = 2000;
+
+    [ShowIf("ISController20"), Button]
+    public void Vibrator_20_Active()
+    {
+        if (Network == null) return;
+        SingleVirbator_20[] Virbator_20;
+        if (Hand == HandType.Left)
+        {
+            Virbator_20 = new SingleVirbator_20[2]
+            {
+                new SingleVirbator_20(1,Duration, Amplitude,Rate),
+                new SingleVirbator_20()
+            };
+            vibrationData = new VibrationData(Virbator_20);
+        }
+        else
+        {
+            Virbator_20 = new SingleVirbator_20[2]
+            {
+                new SingleVirbator_20(),
+                new SingleVirbator_20(1,Duration, Amplitude,Rate)
+            };
+            vibrationData = new VibrationData(Virbator_20);
+        }
+        Network.SendVibrationMsg(CharacterName, SendBackIP, vibrationData, true);
     }
 
 

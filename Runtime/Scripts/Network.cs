@@ -58,7 +58,7 @@ public class Network : MonoBehaviour
     private void ReceiveMsg(EndPoint endpoint, ByteBlock byteblock, IRequestInfo requestinfo)
     {
         string msg = Encoding.UTF8.GetString(byteblock.Buffer, 0, byteblock.Len);
-        Debug.Log(msg);
+        //Debug.Log(msg);
         //WriteIntoTxt(msg);
         JObject obj = JObject.Parse(msg);
         var jps = obj.Properties();
@@ -151,44 +151,119 @@ public class Network : MonoBehaviour
         return flag;
     }
 
-    public void SendVibrationMsg(string RoleName, string IP, VibrationData data)
+    public void SendVibrationMsg(string RoleName, string IP, VibrationData data, bool is_controller20 = false)
     {
         var json_role = new JObject();
         var json_one = new JObject();
         var parameterArrayLeft = new JArray();
         var parameterArrayRight = new JArray();
 
-        var _Lpara_active = new JObject();
-        _Lpara_active.Add("Name", "Vibrators");
-        _Lpara_active.Add("Value", data.Virbators[0].ActiveCommand);
+        if (!is_controller20)
+        {
+            var _Lpara_active = new JObject
+            {
+                { "Name", "Vibrators" },
+                { "Value", data.Virbators[0].ActiveCommand }
+            };
 
-        var _Lpara_duration = new JObject();
-        _Lpara_duration.Add("Name", "Duration");
-        _Lpara_duration.Add("Value", data.Virbators[0].Duration);
+            var _Lpara_duration = new JObject
+            {
+                { "Name", "Duration" },
+                { "Value", data.Virbators[0].Duration }
+            };
 
-        var _Lpara_amplitude = new JObject();
-        _Lpara_amplitude.Add("Name", "Amplitude");
-        _Lpara_amplitude.Add("Value", data.Virbators[0].Amplitude);
+            var _Lpara_amplitude = new JObject
+            {
+                { "Name", "Amplitude" },
+                { "Value", data.Virbators[0].Amplitude }
+            };
 
-        parameterArrayLeft.Add(_Lpara_active);
-        parameterArrayLeft.Add(_Lpara_duration);
-        parameterArrayLeft.Add(_Lpara_amplitude);
+            parameterArrayLeft.Add(_Lpara_active);
+            parameterArrayLeft.Add(_Lpara_duration);
+            parameterArrayLeft.Add(_Lpara_amplitude);
 
-        var _Rpara_active = new JObject();
-        _Rpara_active.Add("Name", "Vibrators");
-        _Rpara_active.Add("Value", data.Virbators[1].ActiveCommand);
+            var _Rpara_active = new JObject
+            {
+                { "Name", "Vibrators" },
+                { "Value", data.Virbators[1].ActiveCommand }
+            };
 
-        var _Rpara_duration = new JObject();
-        _Rpara_duration.Add("Name", "Duration");
-        _Rpara_duration.Add("Value", data.Virbators[1].Duration);
+            var _Rpara_duration = new JObject
+            {
+                { "Name", "Duration" },
+                { "Value", data.Virbators[1].Duration }
+            };
 
-        var _Rpara_amplitude = new JObject();
-        _Rpara_amplitude.Add("Name", "Amplitude");
-        _Rpara_amplitude.Add("Value", data.Virbators[1].Amplitude);
+            var _Rpara_amplitude = new JObject
+            {
+                { "Name", "Amplitude" },
+                { "Value", data.Virbators[1].Amplitude }
+            };
 
-        parameterArrayRight.Add(_Rpara_active);
-        parameterArrayRight.Add(_Rpara_duration);
-        parameterArrayRight.Add(_Rpara_amplitude);
+            parameterArrayRight.Add(_Rpara_active);
+            parameterArrayRight.Add(_Rpara_duration);
+            parameterArrayRight.Add(_Rpara_amplitude);
+        }
+        else
+        {
+            var _Lpara_active = new JObject
+            {
+                { "Name", "Vibrators" },
+                { "Value", data.Virbator_20[0].ActiveCommand }
+            };
+
+            var _Lpara_duration = new JObject
+            {
+                { "Name", "Duration" },
+                { "Value", data.Virbator_20[0].Duration }
+            };
+
+            var _Lpara_amplitude = new JObject
+            {
+                { "Name", "Amplitude" },
+                { "Value", data.Virbator_20[0].Amplitude }
+            };
+
+            var _Lpara_rate = new JObject
+            {
+                { "Name", "Rate" },
+                { "Value", data.Virbator_20[0].Rate }
+            };
+
+            parameterArrayLeft.Add(_Lpara_active);
+            parameterArrayLeft.Add(_Lpara_duration);
+            parameterArrayLeft.Add(_Lpara_amplitude);
+            parameterArrayLeft.Add(_Lpara_rate);
+
+            var _Rpara_active = new JObject
+            {
+                { "Name", "Vibrators" },
+                { "Value", data.Virbator_20[1].ActiveCommand }
+            };
+
+            var _Rpara_duration = new JObject
+            {
+                { "Name", "Duration" },
+                { "Value", data.Virbator_20[1].Duration }
+            };
+
+            var _Rpara_amplitude = new JObject
+            {
+                { "Name", "Amplitude" },
+                { "Value", data.Virbator_20[1].Amplitude }
+            };
+
+            var _Rpara_rate = new JObject
+            {
+                { "Name", "Rate" },
+                { "Value", data.Virbator_20[1].Rate }
+            };
+
+            parameterArrayRight.Add(_Rpara_active);
+            parameterArrayRight.Add(_Rpara_duration);
+            parameterArrayRight.Add(_Rpara_amplitude);
+            parameterArrayRight.Add(_Rpara_rate);
+        }
 
         json_one.Add("LeftHand", parameterArrayLeft);
         json_one.Add("RightHand", parameterArrayRight);
